@@ -45,7 +45,17 @@ def split_to_lemma(feature):
     words=TextBlob(feature).words
     return[word.lemma for word in words]
 
-print(messagesParsed.featureText.head().apply(split_to_lemma))
+# print(messagesParsed.featureText.head().apply(split_to_lemma))
+
+#***********VECTORIZATION : MAGIC OF LINEAR ALGEBRA ********
+# FIND THE TERM FREQUENCY
+termFrequency = CountVectorizer(analyzer=split_to_lemma).fit(messagesParsed['featureText'])
+# print("u" in termFrequency.vocabulary_)
+
+termftest = termFrequency.transform(messagesParsed["featureText"][1])
+print()
+
+
 
     
        
