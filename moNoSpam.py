@@ -14,3 +14,7 @@ from sklearn.grid_search import GridSearchCV
 from sklearn.cross_validation import StratifiedKFold, cross_val_score, train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.learning_curve import learning_curve;
+
+#import corpus
+message_text = [line.rstrip() for line in open('./dataset/spamData')]
+
