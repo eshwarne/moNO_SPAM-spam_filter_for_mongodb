@@ -28,9 +28,24 @@ messagesParsed["len"] = messagesParsed['featureText'].map(lambda message : len(m
 print(messagesParsed.len.describe())
 print(list(messagesParsed.featureText[messagesParsed.len == 910]))
 
-messagesParsed.hist(column='len', by='label',bins=50)
-plt.show()
+# messagesParsed.hist(column='len', by='label',bins=50)
+# plt.show()
 
 #DATA PREPROCESSING :
+#SPLIT A FEATURE TEXT INTO ITS WORDS:
+def split_into_tokens(feature):
+    feature=str(feature)
+    return TextBlob(feature).words
+
+# print(messagesParsed.featureText.head().apply(split_into_tokens))
+
+#FUNCTION TO NORMALIZE A WORD TO ITS BASE FORM
+def split_to_lemma(feature):
+    feature=str(feature).lower() #convert to lower because in spam filtering, uppercase or lowercase does not matter
+    words=TextBlob(feature).words
+    return[word.lemma for word in words]
+
+print(messagesParsed.featureText.head().apply(split_to_lemma))
+
     
        
