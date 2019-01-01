@@ -2,6 +2,7 @@ import matplotlib;
 import matplotlib.pyplot as plt;
 import csv;
 from textblob import TextBlob;
+#pandas to parse data
 import pandas;
 import sklearn;
 import numpy as np;
@@ -18,3 +19,9 @@ from sklearn.learning_curve import learning_curve;
 #import corpus
 message_text = [line.rstrip() for line in open('./dataset/spamData')]
 
+messagesParsed = pandas.read_csv('./dataset/spamData', sep='\t', quoting=csv.QUOTE_NONE, names=["label","featureText"])
+
+print(messagesParsed.head())
+
+    
+       
