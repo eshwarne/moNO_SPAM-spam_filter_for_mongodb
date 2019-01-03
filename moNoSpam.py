@@ -64,4 +64,7 @@ tfidf_transformer = TfidfTransformer().fit(bag_words)
 # print(sentence)
 
 #the word "the" will have a very low idf because it appears in almost every document
-print(tfidf_transformer.idf_[termFrequency.vocabulary_["the"]])
+# print(tfidf_transformer.idf_[termFrequency.vocabulary_["the"]])
+
+features_tfidf = tfidf_transformer.transform(bag_words)
+print(features_tfidf) # prints (document_index,word) and tf-idf
