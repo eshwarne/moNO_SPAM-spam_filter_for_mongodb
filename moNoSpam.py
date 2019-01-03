@@ -67,4 +67,13 @@ tfidf_transformer = TfidfTransformer().fit(bag_words)
 # print(tfidf_transformer.idf_[termFrequency.vocabulary_["the"]])
 
 features_tfidf = tfidf_transformer.transform(bag_words)
-print(features_tfidf) # prints (document_index,word) and tf-idf
+# print(features_tfidf) # prints (document_index,word) and tf-idf
+
+spam_detector = MultinomialNB()
+spam_detector = spam_detector.fit(features_tfidf, messagesParsed["label"])
+#model takens in tfdif transformed vector which takes bow transformed vector
+print(spam_detector.predict(tfidf_transformer.transform(termFrequency.transform([messagesParsed["featureText"][0]]))))
+
+#accuracy
+predictions = spam_detector.predict(features_tfidf)
+print("Accuracy : ",accuracy_score(messagesParsed["label"],predictions)*100)
