@@ -49,13 +49,19 @@ def split_to_lemma(feature):
 
 #***********VECTORIZATION : MAGIC OF LINEAR ALGEBRA ********
 # FIND THE TERM FREQUENCY
+#BAG OF WORDS APPROACH
 termFrequency = CountVectorizer(analyzer=split_to_lemma).fit(messagesParsed['featureText'])
 # print("u" in termFrequency.vocabulary_)
 
-termftest = termFrequency.transform(messagesParsed["featureText"][1])
-print()
+termftest = termFrequency.transform([messagesParsed["featureText"][1]])
+# print(messagesParsed["featureText"][1])
+# print(termftest.shape)
+# print(termFrequency.get_feature_names()[4421])
 
+bag_words = termFrequency.transform(messagesParsed["featureText"])
+tfidf_transformer = TfidfTransformer().fit(bag_words)
+# sentence =  tfidf_transformer.transform(termftest)
+# print(sentence)
 
-
-    
-       
+#the word "the" will have a very low idf because it appears in almost every document
+print(tfidf_transformer.idf_[termFrequency.vocabulary_["the"]])
